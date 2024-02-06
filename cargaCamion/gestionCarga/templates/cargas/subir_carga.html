@@ -1,0 +1,28 @@
+{% include '../header.html' %}
+
+<body class="p-4">
+  {% include '../navbar.html' %}
+
+  <div class="container mt-4">
+    <h1>Asignar Carga a Camión</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="id_camion" class="form-label">Camión:</label>
+        <select name="camion" id="id_camion" class="form-select">
+          {% for camion in camiones %}
+            <option value="{{ camion.patente }}">{{ camion.patente }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Asignar Carga</button>
+      </div>
+    </form>
+  </div>
+
+  {% include '../footer.html' %}
+</body>
+</html>

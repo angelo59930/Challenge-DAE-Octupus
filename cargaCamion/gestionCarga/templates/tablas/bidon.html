@@ -1,0 +1,37 @@
+<table class="table table-bordered table-striped mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th>Contenido</th>
+      <th>Capacidad</th>
+      <th>Densidad</th>
+      <th>Patente del camion</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bidon in bidones %}
+    <tr>
+      <td>{{ bidon.carga.contenido }}</td>
+      <td>{{ bidon.capacidad }}</td>
+      <td>{{ bidon.densidad }}</td>
+      <td>{{ bidon.carga.camion.patente }}</td>
+      <td>
+
+        {% if bidon.carga.camion.patente %}
+        <a
+          href="/cargas/bajar/{{ bidon.carga.id }}"
+          class="btn btn-danger btn-sm"
+          >Bajar Carga</a
+        >
+        {% else %}
+        <a
+          href="/cargas/cargar/{{ bidon.carga.id }}"
+          class="btn btn-success btn-sm"
+          >Subir Carga</a
+        >
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

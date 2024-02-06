@@ -1,0 +1,61 @@
+{% include '../header.html' %}
+<body class="p-4">
+  {% include 'navbar.html' %}
+
+  <div class="container">
+    <h1>Detalle Camión "{{ camion.patente }}"</h1>
+    <div class="card mb-4">
+      <div class="card-body">
+        <p class="card-text"><strong>Patente:</strong> {{ camion.patente }}</p>
+        <p class="card-text"><strong>Carga Máxima:</strong> {{ camion.carga_maxima }}</p>
+        <p class="card-text"><strong>Cantidad de cargas:</strong> {{ camion.cantidad_cargas }}</p>
+        <p class="card-text"><strong>Peso cargado:</strong> {{ camion.peso_cargas }}</p>
+        <p class="card-text"><strong>Estado:</strong> {{ camion.estado }}</p>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h4 class="card-title">Cambiar estado del camión</h4>
+        <form action="/camiones/{{ camion.patente }}/estado" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="estado">Seleccionar estado:</label>
+            <select class="custom-select" name="estado">
+              <option value="Disponible" selected>Disponible</option>
+              <option value="En-viaje">En viaje</option>
+              <option value="De-regreso">De regreso</option>
+              <option value="En-reparacion">En reparación</option>
+            </select>
+          </div>
+          <button class="btn btn-success btn-sm" type="submit">Cambiar estado</button>
+        </form>
+      </div>
+    </div>
+
+    <h1>Cargas</h1>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Cajas</h2>
+        {% include '../tablas/cajas.html' %}
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Paquetes</h2>
+        {% include '../tablas/packing.html' %}
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Bidones</h2>
+        {% include '../tablas/bidon.html' %}
+      </div>
+    </div>
+  </div>
+</body>
+{% include '../footer.html' %}
+</html>

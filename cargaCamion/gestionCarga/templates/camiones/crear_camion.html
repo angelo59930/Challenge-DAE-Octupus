@@ -1,0 +1,41 @@
+{% include '../header.html' %}
+
+<body class="p-4">
+  {%include '../navbar.html'%}
+  <div class="container">
+    <h1>Cargar Camión</h1>
+    
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Camión</h2>
+        <form method="post">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <label for="patente">Patente:</label>
+            <input class="form-control" type="text" id="patente" name="patente">
+          </div>
+          
+          <div class="form-group">
+            <label for="carga_maxima">Carga Máxima:</label>
+            <input class="form-control" type="number" id="carga_maxima" name="carga_maxima">
+          </div>
+          
+          <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" name="estado">
+              <option value="Disponible">Disponible</option>
+              <option value="Reparacion">En reparación</option>
+            </select>
+          </div>
+          
+          <button style="margin-top: 10px" class="btn btn-success" type="submit">Cargar Camion</button>
+          <a style="margin-top: 10px" class="btn btn-danger" href='../'>Cancelar</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% include '../footer.html' %}
+</html>

@@ -1,0 +1,89 @@
+{% include '../header.html' %}
+
+<body class="p-4">
+  {% include '../navbar.html' %}
+  <div class="container">
+    <h1>Crear Carga</h1>
+    <a href="../" class="btn btn-secondary mb-3">Volver</a>
+
+    <form class="form mt-4 mb-4" method="post">
+      {% csrf_token %}
+      
+      <div class="form-group">
+        <label for="tipo">Seleccione el tipo de carga:</label>
+        <select class="form-control" id="tipo" name="tipo" onchange="cambiarFormulario()">
+          <option value="ninguno" selected>Seleccione uno</option>
+          <option value="Caja">Cajas</option>
+          <option value="Packing">Packing</option>
+          <option value="Bidon">Bidon</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="contenido">Contenido:</label>
+        <input class="form-control" type="text" id="contenido" name="contenido" />
+      </div>
+
+      <div id="formularioCaja" style="display: none">
+        <!-- Formulario para Tipo 1 - Cajas -->
+        <div class="form-group">
+          <label for="peso">Peso:</label>
+          <input class="form-control" type="number" id="peso" name="peso" />
+        </div>
+      </div>
+
+      <div id="formularioPacking" style="display: none">
+        <!-- Formulario para Tipo 2 - packing -->
+        <div class="form-group">
+          <label for="peso_por_caja">Peso por caja:</label>
+          <input class="form-control" type="number" id="peso_por_caja" name="peso_por_caja" />
+        </div>
+        <div class="form-group">
+          <label for="cantidad">Cantidad de cajas:</label>
+          <input class="form-control" type="number" id="cantidad" name="cantidad" />
+        </div>
+        <div class="form-group">
+          <label for="peso_estructura">Peso de la estructura:</label>
+          <input class="form-control" type="number" id="peso_estructura" name="peso_estructura" />
+        </div>
+      </div>
+
+      <div id="formularioBidon" style="display: none">
+        <!-- Formulario para Tipo 3 - bidon -->
+        <div class="form-group">
+          <label for="capacidad">Capacidad:</label>
+          <input class="form-control" type="number" id="capacidad" name="capacidad" />
+        </div>
+        <div class="form-group">
+          <label for="densidad">Densidad:</label>
+          <input class="form-control" type="number" id="densidad" name="densidad" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="camion">Camión:</label>
+        <select class="form-control" id="camion" name="camion">
+          <option value="null"></option>
+          {% for camion in camiones %}
+          <option value="{{ camion.id }}">{{ camion.patente }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button style="margin-top:15px"class="btn btn-success" type="submit">Crear Carga</button>
+    </form>
+  </div>
+
+  <script>
+    function cambiarFormulario() {
+      var tipo = document.getElementById("tipo").value;
+      document.getElementById("formularioCaja").style.display = "none";
+      document.getElementById("formularioPacking").style.display = "none";
+      document.getElementById("formularioBidon").style.display = "none";
+      document.getElementById("formulario" + tipo).style.display = "block";
+    }
+  </script>
+
+  {% include '../footer.html' %}
+</body>
+</html>

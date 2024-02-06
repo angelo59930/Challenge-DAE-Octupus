@@ -1,0 +1,38 @@
+<table class="table table-bordered table-striped mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th>Contenido</th>
+      <th>Peso por caja</th>
+      <th>Cantidad</th>
+      <th>Peso de estructura</th>
+      <th>Patente del camion</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for packing in packings %}
+    <tr>
+      <td>{{ packing.carga.contenido }}</td>
+      <td>{{ packing.peso_por_caja }}</td>
+      <td>{{ packing.cantidad }}</td>
+      <td>{{ packing.peso_estructura }}</td>
+      <td>{{ packing.carga.camion.patente }}</td>
+      <td>
+        {% if packing.carga.camion.patente %}
+        <a
+          href="/cargas/bajar/{{ packing.carga.id }}"
+          class="btn btn-danger btn-sm"
+          >Bajar Carga</a
+        >
+        {% else %}
+        <a
+          href="/cargas/cargar/{{ packing.carga.id }}"
+          class="btn btn-success btn-sm"
+          >Subir Carga</a
+        >
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
